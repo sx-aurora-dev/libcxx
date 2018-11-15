@@ -6,19 +6,21 @@
 // Source Licenses. See LICENSE.TXT for details.
 //
 //===----------------------------------------------------------------------===//
-//
-// <type_traits>
-//
-// Test that is_floating_point<T>::value is true when T=__fp16 or T=_Float16.
+// UNSUPPORTED: c++98, c++03, c++11, c++14, c++17
 
+// <chrono>
+// class day;
+
+#include <chrono>
 #include <type_traits>
+#include <cassert>
 
-int main() {
-#ifdef __clang__
-  static_assert(std::is_floating_point<__fp16>::value, "");
-#endif
-#ifdef __FLT16_MANT_DIG__
-  static_assert(std::is_floating_point<_Float16>::value, "");
-#endif
-  return 0;
+#include "test_macros.h"
+
+int main()
+{
+    using day = std::chrono::day;
+
+    static_assert(std::is_trivially_copyable_v<day>, "");
+    static_assert(std::is_standard_layout_v<day>, "");
 }

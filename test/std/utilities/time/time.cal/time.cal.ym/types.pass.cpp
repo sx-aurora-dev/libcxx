@@ -6,20 +6,21 @@
 // Source Licenses. See LICENSE.TXT for details.
 //
 //===----------------------------------------------------------------------===//
+// UNSUPPORTED: c++98, c++03, c++11, c++14, c++17
 
-// <unordered_set>
+// <chrono>
+// class year_month;
 
-// class unordered_multiset
+#include <chrono>
+#include <type_traits>
+#include <cassert>
 
-// insert(...)
-
-// UNSUPPORTED: c++98, c++03
-
-#include <unordered_set>
-#include "container_test_types.h"
-#include "../../set_allocator_requirement_test_templates.h"
+#include "test_macros.h"
 
 int main()
 {
-  testMultisetInsert<TCT::unordered_multiset<> >();
+    using year_month = std::chrono::year_month;
+
+    static_assert(std::is_trivially_copyable_v<year_month>, "");
+    static_assert(std::is_standard_layout_v<year_month>, "");
 }
