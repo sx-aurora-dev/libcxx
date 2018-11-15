@@ -6,21 +6,21 @@
 // Source Licenses. See LICENSE.TXT for details.
 //
 //===----------------------------------------------------------------------===//
+// UNSUPPORTED: c++98, c++03, c++11, c++14, c++17
 
-// <set>
+// <chrono>
+// class weekday;
 
-// class multiset
+#include <chrono>
+#include <type_traits>
+#include <cassert>
 
-// insert(...)
-
-// UNSUPPORTED: c++98, c++03
-
-#include <set>
-
-#include "container_test_types.h"
-#include "../../set_allocator_requirement_test_templates.h"
+#include "test_macros.h"
 
 int main()
 {
-  testMultisetInsert<TCT::multiset<> >();
+    using weekday = std::chrono::weekday;
+
+    static_assert(std::is_trivially_copyable_v<weekday>, "");
+    static_assert(std::is_standard_layout_v<weekday>, "");
 }
